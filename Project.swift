@@ -30,7 +30,7 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "com.quechoisir.app",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchStoryboardName": "LaunchScreen.storyboard",
@@ -55,7 +55,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: "com.quechoisir.core",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: ["Core/Sources/**"],
             dependencies: [
                 .package(product: "Swinject")
@@ -66,7 +66,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: "com.quechoisir.claudeservice",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: ["ClaudeService/Sources/**"],
             dependencies: [
                 .target(name: "Core"),
@@ -79,7 +79,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: "com.quechoisir.topproducts",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: ["TopProductsFeature/Sources/**"],
             dependencies: [
                 .target(name: "Core"),
@@ -92,7 +92,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: "com.quechoisir.compare",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: ["CompareFeature/Sources/**"],
             dependencies: [
                 .target(name: "Core"),
@@ -105,7 +105,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: "com.quechoisir.settings",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: ["SettingsFeature/Sources/**"],
             dependencies: [
                 .target(name: "Core"),
@@ -117,7 +117,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: "com.quechoisir.designsystem",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: ["DesignSystem/Sources/**"],
             resources: ["DesignSystem/Resources/**"],
             dependencies: []
@@ -127,7 +127,7 @@ let project = Project(
             destinations: .iOS,
             product: .unitTests,
             bundleId: "com.quechoisir.app.tests",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             infoPlist: .default,
             sources: ["Tests/**"],
             dependencies: [
