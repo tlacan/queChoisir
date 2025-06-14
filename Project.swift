@@ -13,6 +13,11 @@ let project = Project(
         )
     ],
     settings: .settings(
+        base: [
+            "SWIFT_STRICT_CONCURRENCY": "complete",
+            "SWIFT_UPCOMING_FEATURE_GLOBAL_ACTOR_ISOLATION": "YES",
+            "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor"
+        ],
         configurations: [
             .debug(
                 name: "Debug",

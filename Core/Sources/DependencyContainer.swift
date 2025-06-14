@@ -1,7 +1,6 @@
 import Foundation
 import Swinject
 
-@MainActor
 public final class DependencyContainer: Sendable {
     public static let shared = DependencyContainer()
     

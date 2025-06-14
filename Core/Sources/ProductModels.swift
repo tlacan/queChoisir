@@ -1,13 +1,14 @@
 import Foundation
 
-public struct Product: Codable, Identifiable, Sendable, Hashable {
-    public let id = UUID()
+nonisolated public struct Product: Codable, Identifiable, Sendable, Hashable {
+    public let id: UUID
     public let name: String
     public let specifications: String
     public let price: Double
     public let category: String
     
     public init(name: String, specifications: String, price: Double, category: String) {
+        self.id = UUID()
         self.name = name
         self.specifications = specifications
         self.price = price
@@ -15,7 +16,7 @@ public struct Product: Codable, Identifiable, Sendable, Hashable {
     }
 }
 
-public struct ProductAnalysis: Codable, Sendable {
+nonisolated public struct ProductAnalysis: Codable, Sendable {
     public let reviewsScore: Int
     public let repairabilityScore: Int
     public let reputationScore: Int
@@ -35,7 +36,7 @@ public struct ProductAnalysis: Codable, Sendable {
     }
 }
 
-public struct WeightSettings: Codable, Sendable {
+nonisolated public struct WeightSettings: Codable, Sendable {
     public var reviewsWeight: Double
     public var repairabilityWeight: Double
     public var reputationWeight: Double

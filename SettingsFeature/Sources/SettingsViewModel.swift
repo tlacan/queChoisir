@@ -1,7 +1,6 @@
 import SwiftUI
 import Core
 
-@MainActor
 @Observable
 public final class SettingsViewModel: Sendable {
     public var weightSettings: WeightSettings {

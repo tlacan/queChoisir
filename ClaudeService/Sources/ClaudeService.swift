@@ -76,7 +76,7 @@ public final class ClaudeService: ClaudeServiceProtocol, @unchecked Sendable {
     }
 }
 
-private struct ClaudeAnalysisResponse: Codable, Sendable {
+nonisolated private struct ClaudeAnalysisResponse: Codable, Sendable {
     let reviewsScore: Int
     let repairabilityScore: Int
     let reputationScore: Int
@@ -85,7 +85,7 @@ private struct ClaudeAnalysisResponse: Codable, Sendable {
     let overallScore: Int
     let reasoning: String
     
-    enum CodingKeys: String, CodingKey {
+    nonisolated enum CodingKeys: String, CodingKey {
         case reviewsScore = "reviews_score"
         case repairabilityScore = "repairability_score"
         case reputationScore = "reputation_score"
