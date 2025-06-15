@@ -1,10 +1,10 @@
 import Foundation
-import Swinject
+@preconcurrency import Swinject
 
 public final class DependencyContainer: Sendable {
     public static let shared = DependencyContainer()
     
-    private let container = Container()
+    nonisolated(unsafe) private let container = Container()
     
     private init() {
         setupDependencies()

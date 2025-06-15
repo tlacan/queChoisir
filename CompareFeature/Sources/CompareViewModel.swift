@@ -2,8 +2,9 @@ import SwiftUI
 import Core
 import ClaudeService
 
+@MainActor
 @Observable
-public final class CompareViewModel: Sendable {
+public final class CompareViewModel {
     public private(set) var availableProducts: [Product] = []
     public private(set) var selectedProducts: [Product] = []
     public private(set) var analyzedProducts: [Product: ProductAnalysis] = [:]

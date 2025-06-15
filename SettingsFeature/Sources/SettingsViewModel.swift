@@ -1,8 +1,9 @@
 import SwiftUI
 import Core
 
+@MainActor
 @Observable
-public final class SettingsViewModel: Sendable {
+public final class SettingsViewModel {
     public var weightSettings: WeightSettings {
         didSet {
             saveWeightSettings()

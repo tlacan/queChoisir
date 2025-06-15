@@ -83,6 +83,7 @@ public enum ButtonSize: Sendable {
 
 // MARK: - Button Extensions
 public extension Button {
+    @MainActor
     func queChoisirStyle(
         variant: ButtonVariant = .primary,
         size: ButtonSize = .medium
@@ -179,7 +180,7 @@ public struct QueChoisirButton: View {
 
         switch variant {
         case .destructive:
-             _ = traits.insert(.allowsDirectInteraction)
+            _ = traits.insert(.allowsDirectInteraction)
         default:
             break
         }

@@ -2,8 +2,9 @@ import SwiftUI
 import Core
 import ClaudeService
 
+@MainActor
 @Observable
-public final class TopProductsViewModel: Sendable {
+public final class TopProductsViewModel {
     public private(set) var products: [Product] = []
     public private(set) var analyzedProducts: [Product: ProductAnalysis] = [:]
     public private(set) var isLoading = false
