@@ -320,11 +320,17 @@ private struct ProductSelectionView: View {
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    QueChoisirButton("Done", variant: .primary) {
-                        dismiss()
-                    }
+                  Button {
+                    dismiss()
+                  } label: {
+                    Text("Done")
+                  }
+                  .buttonStyle(.glass)
+                  .padding()
+                  .tint(Color.queChoisir.primary)
                     .disabled(viewModel.selectedProducts.isEmpty)
                 }
+
             }
         }
     }

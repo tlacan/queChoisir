@@ -46,6 +46,7 @@ public final class ClaudeService: ClaudeServiceProtocol, @unchecked Sendable {
         let messageParameter = MessageParameter(model: .claude35Sonnet, messages: [messagePrompt], maxTokens: 1_000)
 
         do {
+            try await Task.sleep(for: .seconds(5))
             let response = try await anthropicService.createMessage(messageParameter)
 
             guard let textContent = response.content.first else {
