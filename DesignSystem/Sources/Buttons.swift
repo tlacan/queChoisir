@@ -83,7 +83,6 @@ public enum ButtonSize: Sendable {
 
 // MARK: - Button Extensions
 public extension Button {
-    @MainActor
     func queChoisirStyle(
         variant: ButtonVariant = .primary,
         size: ButtonSize = .medium

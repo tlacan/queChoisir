@@ -86,7 +86,7 @@ private struct EmptyCompareView: View {
 }
 
 private struct CompareContentView: View {
-    let viewModel: CompareViewModel
+    @Bindable var viewModel: CompareViewModel
 
     var body: some View {
         ScrollView {
@@ -103,8 +103,9 @@ private struct CompareContentView: View {
                         isDisabled: viewModel.isLoading,
                         accessibilityLabel: "Analyze and compare selected products"
                     ) {
+                        let viewModelCaptured = viewModel
                         Task {
-                            await viewModel.analyzeSelectedProducts()
+                            await viewModelCaptured.analyzeSelectedProducts()
                         }
                     }
                     .screenPadding()
@@ -293,7 +294,7 @@ private struct ScoreComparisonRowView: View {
 }
 
 private struct ProductSelectionView: View {
-    let viewModel: CompareViewModel
+    @Bindable var viewModel: CompareViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {

@@ -2,7 +2,6 @@ import ClaudeService
 import Core
 import SwiftUI
 
-@MainActor
 @Observable
 public final class TopProductsViewModel {
     public private(set) var products: [Product] = []

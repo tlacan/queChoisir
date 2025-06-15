@@ -14,6 +14,7 @@ public final class ClaudeService: ClaudeServiceProtocol, @unchecked Sendable {
         self.anthropicService = AnthropicServiceFactory.service(apiKey: apiKey, betaHeaders: nil)
     }
 
+    @concurrent
     public func analyzeProduct(_ product: Product) async throws -> ProductAnalysis {
         let prompt = """
         Analyze this product and give scores (0-100) for each criterion:

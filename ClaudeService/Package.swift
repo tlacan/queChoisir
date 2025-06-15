@@ -32,7 +32,8 @@ let package = Package(
                 "SwiftAnthropic"
             ],
             swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency")
+                .enableExperimentalFeature("StrictConcurrency"),
+                .defaultIsolation(nil) // Explicitly nonisolated
             ]
         )
     ]

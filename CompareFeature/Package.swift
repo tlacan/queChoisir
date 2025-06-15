@@ -26,7 +26,8 @@ let package = Package(
                 "DesignSystem"
             ],
             swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency")
+                .enableExperimentalFeature("StrictConcurrency"),
+                .defaultIsolation(MainActor.self)
             ]
         )
     ]
