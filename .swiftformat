@@ -1,0 +1,61 @@
+# options
+--exclude DerivedData/ # exclude the DerivedData folder from the formating
+--exclude **/*/DerivedData/ # exclude the DerivedData folder from the formating
+--exclude **/*/.build/ # exclude the .build folder from the formating
+--exclude **/*/*_generated.swift # exclude files marked as generated
+
+# swift version
+--swiftversion 6.2
+
+# disabled rules
+--disable all
+
+# enabled rules
+--enable blankLineAfterImports
+--enable conditionalAssignment
+--enable consecutiveSpaces
+--enable docComments
+--enable duplicateImports
+--enable emptyBraces
+--enable enumNamespaces
+--enable extensionAccessControl
+--enable fileHeader
+--enable indent
+--enable initCoderUnavailable
+--enable modifierOrder
+--enable opaqueGenericParameters
+--enable preferKeyPath
+--enable redundantBreak
+--enable redundantClosure
+--enable redundantExtensionACL
+--enable redundantInit
+--enable redundantLet
+--enable redundantLetError
+--enable redundantOptionalBinding
+--enable redundantReturn
+--enable sortImports
+--enable spaceAroundParens
+--enable spaceInsideBraces
+--enable spaceInsideBrackets
+--enable spaceInsideGenerics
+--enable spaceInsideParens
+--enable void
+--enable wrap
+--enable wraparguments
+--enable wrapMultilineConditionalAssignment
+
+# formating options
+--condassignment always
+--header strip
+
+# indent rule
+--tabwidth 4
+
+# wrap rule
+--maxwidth 120
+--wrapternary before-operators
+
+# wraparguments rule
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first

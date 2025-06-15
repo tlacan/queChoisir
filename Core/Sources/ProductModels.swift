@@ -6,7 +6,7 @@ nonisolated public struct Product: Codable, Identifiable, Sendable, Hashable {
     public let specifications: String
     public let price: Double
     public let category: String
-    
+
     public init(name: String, specifications: String, price: Double, category: String) {
         self.id = UUID()
         self.name = name
@@ -24,7 +24,7 @@ nonisolated public struct ProductAnalysis: Codable, Sendable {
     public let priceScore: Int
     public let overallScore: Int
     public let reasoning: String
-    
+
     public init(reviewsScore: Int, repairabilityScore: Int, reputationScore: Int, consumptionScore: Int, priceScore: Int, overallScore: Int, reasoning: String) {
         self.reviewsScore = reviewsScore
         self.repairabilityScore = repairabilityScore
@@ -42,7 +42,7 @@ nonisolated public struct WeightSettings: Codable, Sendable {
     public var reputationWeight: Double
     public var consumptionWeight: Double
     public var priceWeight: Double
-    
+
     public init(reviewsWeight: Double = 1.0, repairabilityWeight: Double = 1.0, reputationWeight: Double = 1.0, consumptionWeight: Double = 1.0, priceWeight: Double = 1.0) {
         self.reviewsWeight = reviewsWeight
         self.repairabilityWeight = repairabilityWeight

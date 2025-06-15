@@ -1,13 +1,13 @@
-import SwiftUI
 import Core
 import DesignSystem
+import SwiftUI
 
 public struct CompareView: View {
     @State private var viewModel = CompareViewModel()
     @State private var showingProductSelection = false
-    
+
     public init() {}
-    
+
     public var body: some View {
         NavigationView {
             Group {
@@ -32,7 +32,7 @@ public struct CompareView: View {
                             showingProductSelection = true
                         }
                     }
-                    
+
                     if !viewModel.selectedProducts.isEmpty {
                         QueChoisirIconButton(
                             icon: "trash",
@@ -61,17 +61,17 @@ public struct CompareView: View {
 
 private struct EmptyCompareView: View {
     let onAddProduct: () -> Void
-    
+
     var body: some View {
         VStack(spacing: .queChoisir.lg) {
             Image(systemName: "scale.3d")
                 .font(.system(size: 64))
                 .foregroundColor(.queChoisir.secondary)
-            
+
             Text(String(localized: "Select products to compare"))
                 .queChoisirStyle(.headlineSmall)
                 .multilineTextAlignment(.center)
-            
+
             QueChoisirButton(
                 String(localized: "Add Product"),
                 icon: "plus",
@@ -87,13 +87,13 @@ private struct EmptyCompareView: View {
 
 private struct CompareContentView: View {
     let viewModel: CompareViewModel
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: .queChoisir.sectionSpacing) {
                 // Selected Products Header
                 SelectedProductsHeaderView(products: viewModel.selectedProducts)
-                
+
                 // Compare Button
                 if !viewModel.selectedProducts.isEmpty {
                     QueChoisirButton(
@@ -109,7 +109,7 @@ private struct CompareContentView: View {
                     }
                     .screenPadding()
                 }
-                
+
                 // Comparison Results
                 if viewModel.selectedProducts.allSatisfy({ viewModel.analyzedProducts[$0] != nil }) {
                     ComparisonResultsView(
@@ -125,13 +125,13 @@ private struct CompareContentView: View {
 
 private struct SelectedProductsHeaderView: View {
     let products: [Product]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: .queChoisir.elementSpacing) {
             Text("Selected Products (\(products.count)/3)")
                 .queChoisirStyle(.titleMedium)
                 .screenPadding()
-            
+
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: .queChoisir.elementSpacing) {
                     ForEach(products) { product in
@@ -146,17 +146,17 @@ private struct SelectedProductsHeaderView: View {
 
 private struct CompactProductCardView: View {
     let product: Product
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: .queChoisir.xxs) {
             Text(product.name)
                 .queChoisirStyle(.labelLarge)
                 .lineLimit(2)
-            
+
             Text("$\(product.price, specifier: "%.0f")")
                 .queChoisirStyle(.labelMedium)
                 .foregroundColor(.queChoisir.primary)
-            
+
             Text(product.category)
                 .queChoisirStyle(.labelSmall)
                 .foregroundColor(.queChoisir.secondaryText)
@@ -172,7 +172,7 @@ private struct CompactProductCardView: View {
 private struct ComparisonResultsView: View {
     let products: [Product]
     let analyses: [Product: ProductAnalysis]
-    
+
     private let scoreCategories = [
         ("Reviews", \ProductAnalysis.reviewsScore),
         ("Repairability", \ProductAnalysis.repairabilityScore),
@@ -180,16 +180,16 @@ private struct ComparisonResultsView: View {
         ("Consumption", \ProductAnalysis.consumptionScore),
         ("Price", \ProductAnalysis.priceScore)
     ]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: .queChoisir.componentSpacing) {
             Text("Comparison Results")
                 .queChoisirStyle(.titleLarge)
                 .screenPadding()
-            
+
             // Overall Scores
             OverallScoresComparisonView(products: products, analyses: analyses)
-            
+
             // Category Comparisons
             ForEach(scoreCategories, id: \.0) { category, keyPath in
                 CategoryComparisonView(
@@ -206,13 +206,13 @@ private struct ComparisonResultsView: View {
 private struct OverallScoresComparisonView: View {
     let products: [Product]
     let analyses: [Product: ProductAnalysis]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: .queChoisir.elementSpacing) {
             Text(String(localized: "Overall Score"))
                 .queChoisirStyle(.titleMedium)
                 .screenPadding()
-            
+
             VStack(spacing: .queChoisir.xs) {
                 ForEach(products) { product in
                     if let analysis = analyses[product] {
@@ -234,19 +234,19 @@ private struct CategoryComparisonView: View {
     let products: [Product]
     let analyses: [Product: ProductAnalysis]
     let scoreKeyPath: KeyPath<ProductAnalysis, Int>
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: .queChoisir.elementSpacing) {
             Text(title)
                 .queChoisirStyle(.titleMedium)
                 .screenPadding()
-            
+
             VStack(spacing: .queChoisir.xs) {
                 ForEach(products) { product in
                     if let analysis = analyses[product] {
                         let score = analysis[keyPath: scoreKeyPath]
                         let maxScore = products.compactMap { analyses[$0]?[keyPath: scoreKeyPath] }.max() ?? 0
-                        
+
                         ScoreComparisonRowView(
                             productName: product.name,
                             score: score,
@@ -264,19 +264,19 @@ private struct ScoreComparisonRowView: View {
     let productName: String
     let score: Int
     let isHighest: Bool
-    
+
     var body: some View {
         HStack {
             Text(productName)
                 .queChoisirStyle(.bodyMedium)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             HStack(spacing: .queChoisir.xxs) {
                 Text("\(score)")
                     .queChoisirStyle(.labelLarge)
                     .fontWeight(isHighest ? .bold : .medium)
                     .foregroundColor(.queChoisir.scoreColor(for: score))
-                
+
                 if isHighest {
                     Image(systemName: "crown.fill")
                         .font(.caption)
@@ -295,7 +295,7 @@ private struct ScoreComparisonRowView: View {
 private struct ProductSelectionView: View {
     let viewModel: CompareViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -317,7 +317,7 @@ private struct ProductSelectionView: View {
                         dismiss()
                     }
                 }
-                
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     QueChoisirButton("Done", variant: .primary) {
                         dismiss()
@@ -334,24 +334,24 @@ private struct ProductSelectionRowView: View {
     let isSelected: Bool
     let canSelect: Bool
     let onToggle: () -> Void
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: .queChoisir.xxs) {
                 Text(product.name)
                     .queChoisirStyle(.bodyLarge)
-                
+
                 Text("$\(product.price, specifier: "%.0f")")
                     .queChoisirStyle(.bodyMedium)
                     .foregroundColor(.queChoisir.primary)
-                
+
                 Text(product.category)
                     .queChoisirStyle(.labelSmall)
                     .foregroundColor(.queChoisir.secondaryText)
             }
-            
+
             Spacer()
-            
+
             Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                 .foregroundColor(isSelected ? .queChoisir.primary : .queChoisir.separator)
                 .font(.title3)

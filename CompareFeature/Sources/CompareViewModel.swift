@@ -1,6 +1,6 @@
-import SwiftUI
-import Core
 import ClaudeService
+import Core
+import SwiftUI
 
 @MainActor
 @Observable
@@ -10,15 +10,15 @@ public final class CompareViewModel {
     public private(set) var analyzedProducts: [Product: ProductAnalysis] = [:]
     public private(set) var isLoading = false
     public var errorMessage: String?
-    
+
     private let claudeService: ClaudeServiceProtocol
     private let maxCompareProducts = 3
-    
+
     public init() {
         self.claudeService = DependencyContainer.shared.resolve(ClaudeServiceProtocol.self)!
         loadAvailableProducts()
     }
-    
+
     public func toggleProductSelection(_ product: Product) {
         if selectedProducts.contains(where: { $0.id == product.id }) {
             selectedProducts.removeAll { $0.id == product.id }
@@ -26,21 +26,21 @@ public final class CompareViewModel {
             selectedProducts.append(product)
         }
     }
-    
+
     public func isProductSelected(_ product: Product) -> Bool {
         selectedProducts.contains(where: { $0.id == product.id })
     }
-    
+
     public var canSelectMoreProducts: Bool {
         selectedProducts.count < maxCompareProducts
     }
-    
+
     public func analyzeSelectedProducts() async {
         guard !selectedProducts.isEmpty else { return }
-        
+
         isLoading = true
         errorMessage = nil
-        
+
         for product in selectedProducts {
             if analyzedProducts[product] == nil {
                 do {
@@ -52,14 +52,14 @@ public final class CompareViewModel {
                 }
             }
         }
-        
+
         isLoading = false
     }
-    
+
     public func clearSelection() {
         selectedProducts.removeAll()
     }
-    
+
     private func loadAvailableProducts() {
         availableProducts = [
             Product(
@@ -83,19 +83,19 @@ public final class CompareViewModel {
             Product(
                 name: "MacBook Pro 14\"",
                 specifications: "M3 Pro chip, 14-inch display, 512GB SSD, 18GB RAM",
-                price: 1999.0,
+                price: 1_999.0,
                 category: "Laptop"
             ),
             Product(
                 name: "Dell XPS 13",
                 specifications: "Intel Core i7, 13.4-inch display, 512GB SSD, 16GB RAM",
-                price: 1299.0,
+                price: 1_299.0,
                 category: "Laptop"
             ),
             Product(
                 name: "MacBook Air M3",
                 specifications: "M3 chip, 13-inch display, 256GB SSD, 8GB RAM",
-                price: 1099.0,
+                price: 1_099.0,
                 category: "Laptop"
             ),
             Product(

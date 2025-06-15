@@ -4,12 +4,12 @@ import SwiftUI
 public struct QueChoisirButtonStyle: ButtonStyle {
     let variant: ButtonVariant
     let size: ButtonSize
-    
+
     public init(variant: ButtonVariant = .primary, size: ButtonSize = .medium) {
         self.variant = variant
         self.size = size
     }
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(fontForSize(size))
@@ -22,7 +22,7 @@ public struct QueChoisirButtonStyle: ButtonStyle {
             .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
             .dynamicTypeSize(...DynamicTypeSize.accessibility3) // Limit max size for buttons
     }
-    
+
     private func fontForSize(_ size: ButtonSize) -> Font {
         switch size {
         case .small: return .queChoisir.labelMedium
@@ -30,7 +30,7 @@ public struct QueChoisirButtonStyle: ButtonStyle {
         case .large: return .queChoisir.titleMedium
         }
     }
-    
+
     private func paddingForSize(_ size: ButtonSize) -> EdgeInsets {
         // Use @ScaledMetric equivalent values for accessibility
         switch size {
@@ -39,7 +39,7 @@ public struct QueChoisirButtonStyle: ButtonStyle {
         case .large: return EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24)
         }
     }
-    
+
     private func cornerRadiusForSize(_ size: ButtonSize) -> CGFloat {
         switch size {
         case .small: return 8
@@ -47,7 +47,7 @@ public struct QueChoisirButtonStyle: ButtonStyle {
         case .large: return 12
         }
     }
-    
+
     private func backgroundColor(for variant: ButtonVariant, isPressed: Bool) -> Color {
         let baseColor: Color
         switch variant {
@@ -58,7 +58,7 @@ public struct QueChoisirButtonStyle: ButtonStyle {
         }
         return isPressed ? baseColor.opacity(0.8) : baseColor
     }
-    
+
     private func foregroundColor(for variant: ButtonVariant, isPressed: Bool) -> Color {
         switch variant {
         case .primary, .destructive: return .white
@@ -102,10 +102,10 @@ public struct QueChoisirButton: View {
     let isDisabled: Bool
     let accessibilityLabel: String?
     let accessibilityHint: String?
-    
+
     @ScaledMetric private var minHeight: CGFloat
     @ScaledMetric private var iconSize: CGFloat
-    
+
     public init(
         _ title: String,
         icon: String? = nil,
@@ -124,7 +124,7 @@ public struct QueChoisirButton: View {
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityHint = accessibilityHint
         self.action = action
-        
+
         // Set minimum height based on button size for accessibility (44pt minimum)
         let baseHeight: CGFloat = switch size {
         case .small: 44 // Always meet 44pt minimum for accessibility
@@ -132,7 +132,7 @@ public struct QueChoisirButton: View {
         case .large: 56
         }
         self._minHeight = ScaledMetric(wrappedValue: baseHeight)
-        
+
         // Set icon size with dynamic scaling
         let baseIconSize: CGFloat = switch size {
         case .small: 16
@@ -141,7 +141,7 @@ public struct QueChoisirButton: View {
         }
         self._iconSize = ScaledMetric(wrappedValue: baseIconSize)
     }
-    
+
     public var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
@@ -150,7 +150,7 @@ public struct QueChoisirButton: View {
                         .font(.system(size: iconSize, weight: .medium))
                         .accessibilityHidden(true) // Hide icon from accessibility, text provides context
                 }
-                
+
                 Text(title)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8) // Allow slight scaling for long text
@@ -165,7 +165,7 @@ public struct QueChoisirButton: View {
         .accessibilityHint(accessibilityHint ?? defaultAccessibilityHint)
         .accessibilityAddTraits(accessibilityTraits)
     }
-    
+
     private var defaultAccessibilityHint: String {
         switch variant {
         case .primary: return "Double tap to perform primary action"
@@ -174,7 +174,7 @@ public struct QueChoisirButton: View {
         case .ghost: return "Double tap to activate"
         }
     }
-    
+
     private var accessibilityTraits: AccessibilityTraits {
         var traits: AccessibilityTraits = .isButton
 
@@ -184,7 +184,7 @@ public struct QueChoisirButton: View {
         default:
             break
         }
-        
+
         return traits
     }
 }
@@ -198,10 +198,10 @@ public struct QueChoisirIconButton: View {
     let isDisabled: Bool
     let accessibilityLabel: String
     let accessibilityHint: String?
-    
+
     @ScaledMetric private var iconSize: CGFloat
     @ScaledMetric private var minTapTarget: CGFloat = 44 // Always meet 44pt minimum
-    
+
     public init(
         icon: String,
         variant: ButtonVariant = .primary,
@@ -218,7 +218,7 @@ public struct QueChoisirIconButton: View {
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityHint = accessibilityHint
         self.action = action
-        
+
         // Set icon size based on button size with dynamic scaling
         let baseIconSize: CGFloat = switch size {
         case .small: 18
@@ -227,7 +227,7 @@ public struct QueChoisirIconButton: View {
         }
         self._iconSize = ScaledMetric(wrappedValue: baseIconSize)
     }
-    
+
     public var body: some View {
         Button(action: action) {
             Image(systemName: icon)
@@ -255,10 +255,10 @@ public struct QueChoisirFloatingActionButton: View {
     let isDisabled: Bool
     let accessibilityLabel: String
     let accessibilityHint: String?
-    
+
     @ScaledMetric private var size: CGFloat = 56
     @ScaledMetric private var iconSize: CGFloat = 24
-    
+
     public init(
         icon: String,
         isDisabled: Bool = false,
@@ -272,7 +272,7 @@ public struct QueChoisirFloatingActionButton: View {
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
-    
+
     public var body: some View {
         Button(action: action) {
             Image(systemName: icon)

@@ -1,12 +1,12 @@
-import SwiftUI
 import Core
 import DesignSystem
+import SwiftUI
 
 public struct TopProductsView: View {
     @State private var viewModel = TopProductsViewModel()
-    
+
     public init() {}
-    
+
     public var body: some View {
         NavigationView {
             ScrollView {
@@ -62,7 +62,7 @@ private struct ProductCardView: View {
     let analysis: ProductAnalysis?
     let isLoading: Bool
     let onAnalyze: () -> Void
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: .queChoisir.elementSpacing) {
             ProductHeaderView(
@@ -71,11 +71,11 @@ private struct ProductCardView: View {
                 isLoading: isLoading,
                 onAnalyze: onAnalyze
             )
-            
+
             if let analysis = analysis {
                 ScoreGridView(analysis: analysis)
                     .componentSpacing()
-                
+
                 Text(analysis.reasoning)
                     .queChoisirStyle(.bodySmall)
                     .foregroundColor(Color.queChoisir.secondaryText)
@@ -90,13 +90,13 @@ private struct ProductHeaderView: View {
     let analysis: ProductAnalysis?
     let isLoading: Bool
     let onAnalyze: () -> Void
-    
+
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: .queChoisir.xxs) {
                 Text(product.name)
                     .queChoisirStyle(.productTitle)
-                
+
                 Text("$\(product.price, specifier: "%.0f")")
                     .queChoisirStyle(.productPrice)
                     .foregroundColor(Color.queChoisir.primary)
@@ -109,9 +109,9 @@ private struct ProductHeaderView: View {
                     .background(Color.queChoisir.secondary.opacity(0.1))
                     .cornerRadius(6)
             }
-            
+
             Spacer()
-            
+
             if let analysis = analysis {
                 OverallScoreView(score: analysis.overallScore)
             } else {
@@ -132,12 +132,12 @@ private struct ProductHeaderView: View {
 
 private struct OverallScoreView: View {
     let score: Int
-    
+
     var body: some View {
         VStack(spacing: .queChoisir.xxs) {
             Text(String(localized: "Overall Score"))
                 .queChoisirStyle(.scoreSubtitle)
-            
+
             Text("\(score)")
                 .queChoisirStyle(.scoreTitle)
                 .foregroundColor(.queChoisir.scoreColor(for: score))
@@ -150,9 +150,9 @@ private struct OverallScoreView: View {
 
 private struct ScoreGridView: View {
     let analysis: ProductAnalysis
-    
+
     private let columns = Array(repeating: GridItem(.flexible(), spacing: .queChoisir.xs), count: 2)
-    
+
     var body: some View {
         LazyVGrid(columns: columns, spacing: .queChoisir.xs) {
             ScoreItemView(title: String(localized: "Reviews"), score: analysis.reviewsScore)
@@ -167,13 +167,13 @@ private struct ScoreGridView: View {
 private struct ScoreItemView: View {
     let title: String
     let score: Int
-    
+
     var body: some View {
         VStack(spacing: .queChoisir.xxs) {
             Text(title)
                 .queChoisirStyle(.labelSmall)
                 .multilineTextAlignment(.center)
-            
+
             Text("\(score)")
                 .queChoisirStyle(.labelMedium)
                 .fontWeight(.semibold)
