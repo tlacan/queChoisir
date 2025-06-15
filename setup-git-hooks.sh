@@ -45,7 +45,7 @@ EXIT_CODE=$?
 # If the script failed, prevent the commit
 if [ $EXIT_CODE -ne 0 ]; then
     echo "❌ Pre-commit checks failed. Please fix the issues above before committing."
-    echo "You can run './pre-commit-format.sh' manually to fix formatting issues."
+    echo "You can run './format-code.sh' to apply formatting fixes."
     exit $EXIT_CODE
 fi
 
@@ -56,21 +56,23 @@ EOF
 # Make the hook executable
 chmod +x "$HOOKS_DIR/pre-commit"
 
-# Make sure our format script is executable
+# Make sure our format scripts are executable
 chmod +x "$REPO_ROOT/pre-commit-format.sh"
+chmod +x "$REPO_ROOT/format-code.sh"
 
 echo "✅ Git hooks setup complete!"
 echo ""
 echo "📋 What was configured:"
 echo "   • Pre-commit hook: $HOOKS_DIR/pre-commit"
-echo "   • Format script: $REPO_ROOT/pre-commit-format.sh"
+echo "   • Format checker: $REPO_ROOT/pre-commit-format.sh"
+echo "   • Format applier: $REPO_ROOT/format-code.sh"
 echo ""
 echo "🎯 How it works:"
 echo "   • Every time you run 'git commit', the pre-commit hook will automatically:"
-echo "     1. Run SwiftFormat to fix code formatting"
-echo "     2. Run SwiftLint to auto-fix linting issues"
-echo "     3. Validate the code with SwiftLint"
-echo "     4. Prevent commit if any issues remain that need manual fixing"
+echo "     1. Check if SwiftFormat would make formatting changes"
+echo "     2. Check if SwiftLint would make auto-fix changes"
+echo "     3. Block the commit if formatting is needed"
+echo "     4. Validate the code with SwiftLint"
 echo ""
 echo "🚀 To test the setup, try making a commit!"
-echo "🔧 To run formatting manually: ./pre-commit-format.sh"
+echo "🔧 To format your code when needed: ./format-code.sh"
