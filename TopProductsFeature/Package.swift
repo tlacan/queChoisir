@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "TopProductsFeature",
     platforms: [
-      .iOS("26.0")
+        .iOS("26.0")
     ],
     products: [
         .library(

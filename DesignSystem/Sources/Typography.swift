@@ -97,26 +97,26 @@ private struct QueChoisirTextModifier: ViewModifier {
 
     private func fontForStyle(_ style: QueChoisirTextStyle) -> Font {
         switch style {
-        case .displayLarge: return .queChoisir.displayLarge
-        case .displayMedium: return .queChoisir.displayMedium
-        case .displaySmall: return .queChoisir.displaySmall
-        case .headlineLarge: return .queChoisir.headlineLarge
-        case .headlineMedium: return .queChoisir.headlineMedium
-        case .headlineSmall: return .queChoisir.headlineSmall
-        case .titleLarge: return .queChoisir.titleLarge
-        case .titleMedium: return .queChoisir.titleMedium
-        case .titleSmall: return .queChoisir.titleSmall
-        case .labelLarge: return .queChoisir.labelLarge
-        case .labelMedium: return .queChoisir.labelMedium
-        case .labelSmall: return .queChoisir.labelSmall
-        case .bodyLarge: return .queChoisir.bodyLarge
-        case .bodyMedium: return .queChoisir.bodyMedium
-        case .bodySmall: return .queChoisir.bodySmall
-        case .scoreTitle: return .queChoisir.scoreTitle
-        case .scoreSubtitle: return .queChoisir.scoreSubtitle
-        case .productTitle: return .queChoisir.productTitle
-        case .productPrice: return .queChoisir.productPrice
-        case .productDescription: return .queChoisir.productDescription
+        case .displayLarge: .queChoisir.displayLarge
+        case .displayMedium: .queChoisir.displayMedium
+        case .displaySmall: .queChoisir.displaySmall
+        case .headlineLarge: .queChoisir.headlineLarge
+        case .headlineMedium: .queChoisir.headlineMedium
+        case .headlineSmall: .queChoisir.headlineSmall
+        case .titleLarge: .queChoisir.titleLarge
+        case .titleMedium: .queChoisir.titleMedium
+        case .titleSmall: .queChoisir.titleSmall
+        case .labelLarge: .queChoisir.labelLarge
+        case .labelMedium: .queChoisir.labelMedium
+        case .labelSmall: .queChoisir.labelSmall
+        case .bodyLarge: .queChoisir.bodyLarge
+        case .bodyMedium: .queChoisir.bodyMedium
+        case .bodySmall: .queChoisir.bodySmall
+        case .scoreTitle: .queChoisir.scoreTitle
+        case .scoreSubtitle: .queChoisir.scoreSubtitle
+        case .productTitle: .queChoisir.productTitle
+        case .productPrice: .queChoisir.productPrice
+        case .productDescription: .queChoisir.productDescription
         }
     }
 
@@ -127,10 +127,10 @@ private struct QueChoisirTextModifier: ViewModifier {
              .titleLarge, .titleMedium, .titleSmall,
              .bodyLarge, .bodyMedium, .bodySmall,
              .scoreTitle, .productTitle, .productPrice:
-            return .queChoisir.text
+            .queChoisir.text
         case .labelLarge, .labelMedium, .labelSmall,
              .scoreSubtitle, .productDescription:
-            return .queChoisir.secondaryText
+            .queChoisir.secondaryText
         }
     }
 }

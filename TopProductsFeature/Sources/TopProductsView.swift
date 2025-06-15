@@ -72,7 +72,7 @@ private struct ProductCardView: View {
                 onAnalyze: onAnalyze
             )
 
-            if let analysis = analysis {
+            if let analysis {
                 ScoreGridView(analysis: analysis)
                     .componentSpacing()
 
@@ -112,7 +112,7 @@ private struct ProductHeaderView: View {
 
             Spacer()
 
-            if let analysis = analysis {
+            if let analysis {
                 OverallScoreView(score: analysis.overallScore)
             } else {
                 QueChoisirButton(

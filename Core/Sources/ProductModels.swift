@@ -1,6 +1,6 @@
 import Foundation
 
-nonisolated public struct Product: Codable, Identifiable, Sendable, Hashable {
+public nonisolated struct Product: Codable, Identifiable, Sendable, Hashable {
     public let id: UUID
     public let name: String
     public let specifications: String
@@ -16,7 +16,7 @@ nonisolated public struct Product: Codable, Identifiable, Sendable, Hashable {
     }
 }
 
-nonisolated public struct ProductAnalysis: Codable, Sendable {
+public nonisolated struct ProductAnalysis: Codable, Sendable {
     public let reviewsScore: Int
     public let repairabilityScore: Int
     public let reputationScore: Int
@@ -25,7 +25,15 @@ nonisolated public struct ProductAnalysis: Codable, Sendable {
     public let overallScore: Int
     public let reasoning: String
 
-    public init(reviewsScore: Int, repairabilityScore: Int, reputationScore: Int, consumptionScore: Int, priceScore: Int, overallScore: Int, reasoning: String) {
+    public init(
+        reviewsScore: Int,
+        repairabilityScore: Int,
+        reputationScore: Int,
+        consumptionScore: Int,
+        priceScore: Int,
+        overallScore: Int,
+        reasoning: String
+    ) {
         self.reviewsScore = reviewsScore
         self.repairabilityScore = repairabilityScore
         self.reputationScore = reputationScore
@@ -36,14 +44,20 @@ nonisolated public struct ProductAnalysis: Codable, Sendable {
     }
 }
 
-nonisolated public struct WeightSettings: Codable, Sendable {
+public nonisolated struct WeightSettings: Codable, Sendable {
     public var reviewsWeight: Double
     public var repairabilityWeight: Double
     public var reputationWeight: Double
     public var consumptionWeight: Double
     public var priceWeight: Double
 
-    public init(reviewsWeight: Double = 1.0, repairabilityWeight: Double = 1.0, reputationWeight: Double = 1.0, consumptionWeight: Double = 1.0, priceWeight: Double = 1.0) {
+    public init(
+        reviewsWeight: Double = 1.0,
+        repairabilityWeight: Double = 1.0,
+        reputationWeight: Double = 1.0,
+        consumptionWeight: Double = 1.0,
+        priceWeight: Double = 1.0
+    ) {
         self.reviewsWeight = reviewsWeight
         self.repairabilityWeight = repairabilityWeight
         self.reputationWeight = reputationWeight

@@ -11,7 +11,7 @@ public final class ClaudeService: ClaudeServiceProtocol, @unchecked Sendable {
     private let anthropicService: AnthropicService
 
     public init(apiKey: String) {
-      self.anthropicService = AnthropicServiceFactory.service(apiKey: apiKey, betaHeaders: nil)
+        self.anthropicService = AnthropicServiceFactory.service(apiKey: apiKey, betaHeaders: nil)
     }
 
     public func analyzeProduct(_ product: Product) async throws -> ProductAnalysis {
@@ -41,42 +41,42 @@ public final class ClaudeService: ClaudeServiceProtocol, @unchecked Sendable {
         }
         """
 
-      let messagePrompt = MessageParameter.Message(role: .user, content: .text(prompt))
-      let messageParameter = MessageParameter(model: .claude35Sonnet, messages: [messagePrompt], maxTokens: 1_000)
+        let messagePrompt = MessageParameter.Message(role: .user, content: .text(prompt))
+        let messageParameter = MessageParameter(model: .claude35Sonnet, messages: [messagePrompt], maxTokens: 1_000)
 
-      do {
-          let response = try await anthropicService.createMessage(messageParameter)
+        do {
+            let response = try await anthropicService.createMessage(messageParameter)
 
-          guard let textContent = response.content.first else {
+            guard let textContent = response.content.first else {
                 throw ClaudeServiceError.invalidResponse
             }
 
-          let textString: String
-          switch textContent {
+            let textString: String
+            switch textContent {
             case .text(let text): textString = text
             default: throw ClaudeServiceError.invalidResponse
-          }
+            }
 
-          let analysisData = Data(textString.utf8)
-          let decoder = JSONDecoder()
-          let analysis = try decoder.decode(ClaudeAnalysisResponse.self, from: analysisData)
+            let analysisData = Data(textString.utf8)
+            let decoder = JSONDecoder()
+            let analysis = try decoder.decode(ClaudeAnalysisResponse.self, from: analysisData)
 
-          return ProductAnalysis(
-              reviewsScore: analysis.reviewsScore,
-              repairabilityScore: analysis.repairabilityScore,
-              reputationScore: analysis.reputationScore,
-              consumptionScore: analysis.consumptionScore,
-              priceScore: analysis.priceScore,
-              overallScore: analysis.overallScore,
-              reasoning: analysis.reasoning
-          )
+            return ProductAnalysis(
+                reviewsScore: analysis.reviewsScore,
+                repairabilityScore: analysis.repairabilityScore,
+                reputationScore: analysis.reputationScore,
+                consumptionScore: analysis.consumptionScore,
+                priceScore: analysis.priceScore,
+                overallScore: analysis.overallScore,
+                reasoning: analysis.reasoning
+            )
         } catch {
             throw ClaudeServiceError.networkError
         }
     }
 }
 
-nonisolated private struct ClaudeAnalysisResponse: Codable, Sendable {
+private nonisolated struct ClaudeAnalysisResponse: Codable, Sendable {
     let reviewsScore: Int
     let repairabilityScore: Int
     let reputationScore: Int

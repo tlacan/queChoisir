@@ -25,45 +25,45 @@ public struct QueChoisirButtonStyle: ButtonStyle {
 
     private func fontForSize(_ size: ButtonSize) -> Font {
         switch size {
-        case .small: return .queChoisir.labelMedium
-        case .medium: return .queChoisir.labelLarge
-        case .large: return .queChoisir.titleMedium
+        case .small: .queChoisir.labelMedium
+        case .medium: .queChoisir.labelLarge
+        case .large: .queChoisir.titleMedium
         }
     }
 
     private func paddingForSize(_ size: ButtonSize) -> EdgeInsets {
         // Use @ScaledMetric equivalent values for accessibility
         switch size {
-        case .small: return EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
-        case .medium: return EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20)
-        case .large: return EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24)
+        case .small: EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+        case .medium: EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20)
+        case .large: EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24)
         }
     }
 
     private func cornerRadiusForSize(_ size: ButtonSize) -> CGFloat {
         switch size {
-        case .small: return 8
-        case .medium: return 10
-        case .large: return 12
+        case .small: 8
+        case .medium: 10
+        case .large: 12
         }
     }
 
     private func backgroundColor(for variant: ButtonVariant, isPressed: Bool) -> Color {
-        let baseColor: Color
-        switch variant {
-        case .primary: baseColor = .queChoisir.buttonPrimary
-        case .secondary: baseColor = .queChoisir.buttonSecondary
-        case .destructive: baseColor = .queChoisir.buttonDestructive
-        case .ghost: baseColor = .clear
-        }
+        let baseColor: Color =
+            switch variant {
+            case .primary: .queChoisir.buttonPrimary
+            case .secondary: .queChoisir.buttonSecondary
+            case .destructive: .queChoisir.buttonDestructive
+            case .ghost: .clear
+            }
         return isPressed ? baseColor.opacity(0.8) : baseColor
     }
 
     private func foregroundColor(for variant: ButtonVariant, isPressed: Bool) -> Color {
         switch variant {
-        case .primary, .destructive: return .white
-        case .secondary: return .queChoisir.text
-        case .ghost: return .queChoisir.primary
+        case .primary, .destructive: .white
+        case .secondary: .queChoisir.text
+        case .ghost: .queChoisir.primary
         }
     }
 }
@@ -126,26 +126,28 @@ public struct QueChoisirButton: View {
         self.action = action
 
         // Set minimum height based on button size for accessibility (44pt minimum)
-        let baseHeight: CGFloat = switch size {
-        case .small: 44 // Always meet 44pt minimum for accessibility
-        case .medium: 48
-        case .large: 56
-        }
+        let baseHeight: CGFloat =
+            switch size {
+            case .small: 44 // Always meet 44pt minimum for accessibility
+            case .medium: 48
+            case .large: 56
+            }
         self._minHeight = ScaledMetric(wrappedValue: baseHeight)
 
         // Set icon size with dynamic scaling
-        let baseIconSize: CGFloat = switch size {
-        case .small: 16
-        case .medium: 18
-        case .large: 20
-        }
+        let baseIconSize: CGFloat =
+            switch size {
+            case .small: 16
+            case .medium: 18
+            case .large: 20
+            }
         self._iconSize = ScaledMetric(wrappedValue: baseIconSize)
     }
 
     public var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
-                if let icon = icon {
+                if let icon {
                     Image(systemName: icon)
                         .font(.system(size: iconSize, weight: .medium))
                         .accessibilityHidden(true) // Hide icon from accessibility, text provides context
@@ -168,10 +170,10 @@ public struct QueChoisirButton: View {
 
     private var defaultAccessibilityHint: String {
         switch variant {
-        case .primary: return "Double tap to perform primary action"
-        case .secondary: return "Double tap to perform secondary action"
-        case .destructive: return "Double tap to perform destructive action"
-        case .ghost: return "Double tap to activate"
+        case .primary: "Double tap to perform primary action"
+        case .secondary: "Double tap to perform secondary action"
+        case .destructive: "Double tap to perform destructive action"
+        case .ghost: "Double tap to activate"
         }
     }
 
@@ -220,11 +222,12 @@ public struct QueChoisirIconButton: View {
         self.action = action
 
         // Set icon size based on button size with dynamic scaling
-        let baseIconSize: CGFloat = switch size {
-        case .small: 18
-        case .medium: 20
-        case .large: 24
-        }
+        let baseIconSize: CGFloat =
+            switch size {
+            case .small: 18
+            case .medium: 20
+            case .large: 24
+            }
         self._iconSize = ScaledMetric(wrappedValue: baseIconSize)
     }
 

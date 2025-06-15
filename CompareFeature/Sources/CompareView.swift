@@ -193,7 +193,7 @@ private struct ComparisonResultsView: View {
             // Category Comparisons
             ForEach(scoreCategories, id: \.0) { category, keyPath in
                 CategoryComparisonView(
-                  title: String(localized: LocalizedStringResource(stringLiteral: category)),
+                    title: String(localized: LocalizedStringResource(stringLiteral: category)),
                     products: products,
                     analyses: analyses,
                     scoreKeyPath: keyPath
@@ -365,7 +365,10 @@ private struct ProductSelectionRowView: View {
         .opacity(canSelect ? 1.0 : 0.5)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(product.name), \(product.price) dollars, \(isSelected ? "selected" : "not selected")")
-        .accessibilityHint(canSelect ? "Double tap to \(isSelected ? "deselect" : "select")" : "Selection limit reached")
+        .accessibilityHint(canSelect
+            ? "Double tap to \(isSelected ? "deselect" : "select")"
+            : "Selection limit reached"
+        )
         .accessibility(addTraits: .isButton)
         // .accessibilityAddTraits(canSelect ? .button : [])
     }

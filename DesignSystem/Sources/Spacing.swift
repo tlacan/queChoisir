@@ -19,10 +19,10 @@ public struct QueChoisirSpacing: Sendable {
     public let xxxl: CGFloat = 64
 
     // MARK: - Semantic Spacing
-    public let elementSpacing: CGFloat = 8      // Between related elements
-    public let componentSpacing: CGFloat = 16   // Between components
-    public let sectionSpacing: CGFloat = 24     // Between sections
-    public let screenPadding: CGFloat = 16      // Screen edge padding
+    public let elementSpacing: CGFloat = 8 // Between related elements
+    public let componentSpacing: CGFloat = 16 // Between components
+    public let sectionSpacing: CGFloat = 24 // Between sections
+    public let screenPadding: CGFloat = 16 // Screen edge padding
 
     // MARK: - Content Spacing
     public let contentPadding: CGFloat = 16
@@ -102,21 +102,21 @@ public struct QueChoisirSpacer: View {
 
     private func heightForSize(_ size: SpacerSize) -> CGFloat {
         switch size {
-        case .xs: return .queChoisir.xs
-        case .small: return .queChoisir.sm
-        case .medium: return .queChoisir.md
-        case .large: return .queChoisir.lg
-        case .xl: return .queChoisir.xl
+        case .xs: .queChoisir.xs
+        case .small: .queChoisir.sm
+        case .medium: .queChoisir.md
+        case .large: .queChoisir.lg
+        case .xl: .queChoisir.xl
         }
     }
 
     private func widthForSize(_ size: SpacerSize) -> CGFloat {
         switch size {
-        case .xs: return .queChoisir.xs
-        case .small: return .queChoisir.sm
-        case .medium: return .queChoisir.md
-        case .large: return .queChoisir.lg
-        case .xl: return .queChoisir.xl
+        case .xs: .queChoisir.xs
+        case .small: .queChoisir.sm
+        case .medium: .queChoisir.md
+        case .large: .queChoisir.lg
+        case .xl: .queChoisir.xl
         }
     }
 }

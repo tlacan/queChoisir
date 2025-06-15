@@ -1,7 +1,7 @@
 import SwiftUI
 
 public extension Color {
-  static let queChoisir = QueChoisirColors()
+    static let queChoisir = QueChoisirColors()
 }
 
 public struct QueChoisirColors: Sendable {
@@ -32,13 +32,13 @@ public struct QueChoisirColors: Sendable {
     public func scoreColor(for score: Int) -> Color {
         switch score {
         case 80...100:
-            return success
+            success
         case 60...79:
-            return warning
+            warning
         case 40...59:
-            return accent
+            accent
         default:
-            return error
+            error
         }
     }
 

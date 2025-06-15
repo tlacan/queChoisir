@@ -4,7 +4,7 @@ import Foundation
 public final class DependencyContainer: Sendable {
     public static let shared = DependencyContainer()
 
-    nonisolated(unsafe) private let container = Container()
+    private nonisolated(unsafe) let container = Container()
 
     private init() {
         setupDependencies()

@@ -38,18 +38,18 @@ public final class SettingsViewModel {
     public var isUsingDefaultWeights: Bool {
         let defaultSettings = WeightSettings()
         return weightSettings.reviewsWeight == defaultSettings.reviewsWeight &&
-               weightSettings.repairabilityWeight == defaultSettings.repairabilityWeight &&
-               weightSettings.reputationWeight == defaultSettings.reputationWeight &&
-               weightSettings.consumptionWeight == defaultSettings.consumptionWeight &&
-               weightSettings.priceWeight == defaultSettings.priceWeight
+            weightSettings.repairabilityWeight == defaultSettings.repairabilityWeight &&
+            weightSettings.reputationWeight == defaultSettings.reputationWeight &&
+            weightSettings.consumptionWeight == defaultSettings.consumptionWeight &&
+            weightSettings.priceWeight == defaultSettings.priceWeight
     }
 
     public func normalizedWeightSettings() -> WeightSettings {
         let total = weightSettings.reviewsWeight +
-                   weightSettings.repairabilityWeight +
-                   weightSettings.reputationWeight +
-                   weightSettings.consumptionWeight +
-                   weightSettings.priceWeight
+            weightSettings.repairabilityWeight +
+            weightSettings.reputationWeight +
+            weightSettings.consumptionWeight +
+            weightSettings.priceWeight
 
         guard total > 0 else { return WeightSettings() }
 
