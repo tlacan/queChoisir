@@ -38,34 +38,43 @@ else
     swiftformat "$PROJECT_ROOT" --config "$PROJECT_ROOT/.swiftformat" --dryrun --quiet
     SWIFTFORMAT_DRYRUN_EXIT_CODE=$?
     
-    if [ $SWIFTFORMAT_DRYRUN_EXIT_CODE -ne 0 ]; then
-        echo "❌ SwiftFormat would make formatting changes to your code"
-        echo "🔧 Please run: ./pre-commit-format.sh"
-        echo "📝 Then review and add the formatted changes to your commit"
-        exit 1
-    fi
-    
     # Check if SwiftLint would make changes
     echo "🔍 Checking SwiftLint auto-fix..."
     cd "$PROJECT_ROOT"
     
-    # Create a temporary file to capture SwiftLint output
+    # Create a temporary copy to test SwiftLint changes
     TEMP_OUTPUT=$(mktemp)
     swiftlint --fix --config "$PROJECT_ROOT/.swiftlint.yml" --quiet > "$TEMP_OUTPUT" 2>&1
-    SWIFTLINT_FIX_EXIT_CODE=$?
+    SWIFTLINT_WOULD_CHANGE=false
     
     # Check if git working directory is clean after SwiftLint fix
     if ! git diff --quiet; then
-        echo "❌ SwiftLint would make auto-fix changes to your code"
-        echo "🔧 Please run: ./pre-commit-format.sh"
-        echo "📝 Then review and add the auto-fixed changes to your commit"
-        # Restore the original state
+        SWIFTLINT_WOULD_CHANGE=true
+        # Restore the original state for now
         git checkout -- .
-        rm -f "$TEMP_OUTPUT"
-        exit 1
     fi
     
     rm -f "$TEMP_OUTPUT"
+    
+    # If either tool would make changes, apply them automatically
+    if [ $SWIFTFORMAT_DRYRUN_EXIT_CODE -ne 0 ] || [ "$SWIFTLINT_WOULD_CHANGE" = true ]; then
+        echo "🔧 Formatting issues detected. Auto-fixing..."
+        
+        # Run SwiftFormat to fix formatting
+        echo "🎨 Running SwiftFormat..."
+        swiftformat "$PROJECT_ROOT" --config "$PROJECT_ROOT/.swiftformat"
+        
+        # Run SwiftLint to auto-fix issues
+        echo "🔍 Running SwiftLint auto-fix..."
+        swiftlint --fix --config "$PROJECT_ROOT/.swiftlint.yml" --quiet
+        
+        echo "✅ Code has been automatically formatted!"
+        echo "📝 Please review the changes and re-stage them:"
+        echo "   git add ."
+        echo "   git commit"
+        exit 1
+    fi
+    
     echo "✅ No formatting changes needed"
 fi
 
