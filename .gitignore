@@ -44,7 +44,7 @@ xcuserdata/
 ### Projects ###
 *.xcodeproj
 *.xcworkspace
-Submodules/**/*/Package.resolved
+**/Package.resolved
 
 ### Tuist derived files ###
 graph.dot
@@ -52,4 +52,5 @@ Derived/
 
 ### Tuist managed dependencies ###
 Tuist/.build
+**/.build/
 
